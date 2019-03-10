@@ -1,0 +1,8 @@
+# folders ignore
+.vs/
+[oO]bj/
+[bB]in/
+[lL]ogs/
+
+# files ignore
+*.pubxml
