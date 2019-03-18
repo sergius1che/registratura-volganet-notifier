@@ -3,6 +3,12 @@
 [oO]bj/
 [bB]in/
 [lL]ogs/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+/node_modules
 
 # files ignore
 *.pubxml
+*-apikey.json
