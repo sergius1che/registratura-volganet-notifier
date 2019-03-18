@@ -14,7 +14,7 @@ namespace RegVlg.Services.Common
         public async Task<string> GetHtmlPage(string controller, string action)
         {
             var pageBuilder = GetPage(controller, action);
-            return 
+            return string.Empty;
         }
 
         public async Task<string> GetHtmlPage(string controller, string action, IDictionary<string, object> templateValues)
@@ -32,13 +32,7 @@ namespace RegVlg.Services.Common
 
         private void RemoveVars(StringBuilder stringBuilder)
         {
-            int index;
-
-            do
-            {
-                index = stringBuilder.
-            } while (index != -1);
+            throw new NotImplementedException();
         }
-
     }
 }

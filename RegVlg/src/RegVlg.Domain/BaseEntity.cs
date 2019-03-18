@@ -4,8 +4,21 @@ using System.Text;
 
 namespace RegVlg.Domain
 {
-    public abstract class BaseEntity
+    public interface IEntity
+    {
+        Guid Uid { get; set; }
+
+        DateTime InsertDateUtc { get; set; }
+
+        DateTime ChangeDateUtc { get; set; }
+    }
+
+    public abstract class BaseEntity : IEntity
     {
         public Guid Uid { get; set; }
+
+        public DateTime InsertDateUtc { get; set; }
+
+        public DateTime ChangeDateUtc { get; set; }
     }
 }

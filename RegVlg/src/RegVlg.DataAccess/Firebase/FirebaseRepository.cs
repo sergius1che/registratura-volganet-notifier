@@ -17,20 +17,30 @@ namespace RegVlg.DataAccess.Firebase
         }
 
         public async Task<T> Get<T>(Guid id)
-            where T : BaseEntity
+            where T : IEntity
         {
-            var query = _db.Collection(typeof(T).Name).WhereEqualTo(nameof(BaseEntity.Uid), id);
+            var query = _db.Collection(typeof(T).Name).WhereEqualTo(nameof(IEntity.Uid), id);
             var sn = await query.GetSnapshotAsync();
             return sn.Single().ConvertTo<T>();
         }
 
         public async Task Update<T>(T entity)
-            where T : BaseEntity
+            where T : IEntity
         {
+            entity.ChangeDateUtc = DateTime.UtcNow;
             var doc = _db.Collection(typeof(T).Name).Document(entity.Uid.ToString());
             var res = await doc.SetAsync(entity);
         }
 
-        public async Task<T> Create()
+        public async Task<T> Create<T>(T entity)
+            where T : IEntity
+        {
+            entity.Uid = Guid.NewGuid();
+            entity.InsertDateUtc = DateTime.UtcNow;
+            entity.ChangeDateUtc = entity.InsertDateUtc;
+            var result = await _db.Collection(typeof(T).Name).AddAsync(entity);
+            var shot = await result.GetSnapshotAsync();
+            return shot.ConvertTo<T>();
+        }
     }
 }
